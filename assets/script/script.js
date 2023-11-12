@@ -98,11 +98,10 @@ const directors = [
     top_rated_film: "Далласский клуб покупателей",
   },
 ];
-// Вызываем метод forEach у массива
+// Вызываем метод forEach у массива и в функцию-обработчик добавим код, который относится к работе с DOM
 directors.forEach(function (director) {
-  // В функцию-обработчик добавим код, который относится к работе с DOM
-  const nameElement = document.getElementById("name");
-  const careerElement = document.getElementById("career");
+  const nameElement = document.createElement("h2");
+  const careerElement = document.createElement("p");
   const filmsElement = document.createElement("p");
 
   nameElement.textContent = director.name;
@@ -113,29 +112,24 @@ directors.forEach(function (director) {
     '" target="_blank">' +
     "Фильмография" +
     "</a>";
-  // topRatedFilmElement.textContent = "Лучший фильм: " + director.top_rated_film;
 
   // Добавляем информацию на страницу
-  document.body.appendChild(nameElement);
-  document.body.appendChild(careerElement);
-  document.body.appendChild(filmsElement);
-  // document.body.appendChild(topRatedFilmElement);
+  document.body.append(nameElement);
+  document.body.append(careerElement);
+  document.body.append(filmsElement);
 });
 
 // Создаем новый массив topFilmsList с лучшими фильмами режиссёров
 const topFilmsList = directors.map(function (director) {
-  return {
-    name: director.name,
-    top_rated_film: director.top_rated_film,
-  };
+  return director.top_rated_film;
 });
-console.log(topFilmsList);
 
+// Выводим информацию из нового массива на страницу
 const topFilms = document.createElement("h3");
 const topRatedFilmElement = document.createElement("p");
 
 topFilms.textContent = "Лучшие фильмы: ";
 topRatedFilmElement.textContent = topFilmsList;
 
-document.body.appendChild(topFilms);
-// document.body.appendChild(topFilmsList);
+document.body.append(topFilms);
+document.body.append(topFilmsList);
